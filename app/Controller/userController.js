@@ -45,7 +45,7 @@ router.get('/info',authenticateUser, (req,res) =>{
     // const {user} = req
     User.find()
     .then((users) => {
-        res.json((users.map(user => {return(_.pick(user,['_id','email']))})))
+        res.json((users.map(user => {return(_.pick(user,['_id','email']).sort({createdAt: -1}))})))
     })
     .catch((err) => {
         res.send(err)
