@@ -30,7 +30,7 @@ class ChatList extends React.Component{
                 {this.state.list.map(lists => {
                     return(
                         <div key={lists._id}>
-                            <Link to={`/chats/${lists._id}`}>{lists.group}</Link><br/>
+                            <Link to={`/chat/${lists._id}`}>{lists.group}</Link><br/>
                             <p>{lists.desc}</p>
                         </div>
                     )   

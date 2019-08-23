@@ -8,6 +8,8 @@ import Account from './Components/User/Account'
 import Logout from './Components/User/Logout'
 
 import ChatList from './Components/Chat/ChatList'
+import ChatGroup from './Components/Chat/ChatGroup'
+import ChatNew from './Components/Chat/ChatNew'
 
 class App extends React.Component {
     constructor(props){
@@ -46,11 +48,16 @@ class App extends React.Component {
                     )}
                     { this.state.isAuthenticated && (
                         <div>
+                            <h2>Group Lists</h2>
+                            <Link to='/chat/new'>New Group</Link>
                             <ChatList />
                             <Link to='/users/account'>Account</Link>
                             <Switch>
                                 <>
                                     <Route exact strict path="/users/account" component={Account}/>
+                                    <Route exact strict path="/chat" component={ChatList}/>
+                                    <Route exact strict path="/chat/new" component={ChatNew}/>
+                                    <Route exact strict path="/chat/:id" component={ChatGroup}/>
                                     <Route exact strict path="/users/logout" render={(props)=>{
                                         return <Logout {...props} handleAuth={this.handleAuth}/> }}/>
                                 </>
