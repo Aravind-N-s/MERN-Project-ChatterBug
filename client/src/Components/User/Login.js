@@ -33,6 +33,7 @@ class Login extends React.Component{
                 if(token){
                     localStorage.setItem('userAuthToken',token)
                     this.props.handleAuth(true)
+                    this.props.history.push('/')
                 }
             }
         })

@@ -7,6 +7,8 @@ import Register from './Components/User/Register'
 import Account from './Components/User/Account'
 import Logout from './Components/User/Logout'
 
+import ChatList from './Components/Chat/ChatList'
+
 class App extends React.Component {
     constructor(props){
         super(props)
@@ -44,7 +46,7 @@ class App extends React.Component {
                     )}
                     { this.state.isAuthenticated && (
                         <div>
-                            <h1>Hello</h1>
+                            <ChatList />
                             <Link to='/users/account'>Account</Link>
                             <Switch>
                                 <>
