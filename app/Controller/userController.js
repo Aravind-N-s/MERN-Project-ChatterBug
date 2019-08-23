@@ -55,7 +55,7 @@ router.get('/info',authenticateUser, (req,res) =>{
 //localhost:3005/users/logout
 router.delete('/logout',authenticateUser, (req,res) =>{
     const { user, token } = req
-    User.findByIdAndDelete(user._id,{$pull: {tokens: { token: token }}})
+    User.findByIdAndUpdate(user._id,{$pull: {tokens: { token: token }}})
         .then(function(){
             res.send({notice:'successfully logged out'})
         })
