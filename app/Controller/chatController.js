@@ -3,7 +3,7 @@ module.exports.list = (req,res) => {
     const {user} = req
     Chat.find({
         userAdmin:user._id
-    }).populate('userAdmin._id').sort({createdAt: -1})
+    }).sort({createdAt: -1})
     .then((chats) => {
         res.json(chats)
     })
@@ -34,7 +34,7 @@ module.exports.show = (req,res) => {
     Chat.findOne({
         userAdmin:req.user._id,
         _id: id
-    })
+    }).populate('userAdmin','twoLevel')
     .then((chat) => {
         if(!chat){
             res.json({})

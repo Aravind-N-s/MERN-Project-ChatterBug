@@ -41,7 +41,8 @@ class App extends React.Component {
                                 <>
                                     <Route exact strict path="/users/login" render={(props)=>{
                                         return <Login {...props } handleAuth={this.handleAuth}/>}}/>
-                                    <Route exact strict path="/users/register" component={Register}/>
+                                    <Route exact strict path="/users/register" render = {(props) => {
+                                        return <ChatGroup {...props} handleAuth={this.handleAuth}/>}}/>
                                 </>
                             </Switch>
                         </div>
@@ -55,7 +56,6 @@ class App extends React.Component {
                             <Switch>
                                 <>
                                     <Route exact strict path="/users/account" component={Account}/>
-                                    <Route exact strict path="/chat" component={ChatList}/>
                                     <Route exact strict path="/chat/new" component={ChatNew}/>
                                     <Route exact strict path="/chat/:id" component={ChatGroup}/>
                                     <Route exact strict path="/users/logout" render={(props)=>{
