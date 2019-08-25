@@ -14,7 +14,10 @@ const path = require("path")
 const port = process.env.PORT || 3005
 
 io.on('connection', function(socket){
-    console.log('a user connected');
+    console.log('a user connected')
+    socket.on('chat message', function(msg){
+        io.emit('chat message', msg)
+      })
 })
   
 http.listen(3001, function(){

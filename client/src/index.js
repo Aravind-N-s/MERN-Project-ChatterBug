@@ -42,7 +42,7 @@ class App extends React.Component {
                                     <Route exact strict path="/users/login" render={(props)=>{
                                         return <Login {...props } handleAuth={this.handleAuth}/>}}/>
                                     <Route exact strict path="/users/register" render = {(props) => {
-                                        return <ChatGroup {...props} handleAuth={this.handleAuth}/>}}/>
+                                        return <Register {...props} handleAuth={this.handleAuth}/>}}/>
                                 </>
                             </Switch>
                         </div>
