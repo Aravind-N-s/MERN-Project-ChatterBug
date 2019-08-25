@@ -2,6 +2,8 @@ const express = require('express')
 const cors = require('cors')
 const {mongoose} = require('./Config/database') // mongoose without {} if single value is passed
 const app = express()
+var http = require('http').createServer(app)
+var io = require('socket.io')(http)
 //1st approach
 const router = require('./Config/routes')
 //2nd approach
@@ -10,6 +12,14 @@ const { usersRouter } = require('./app/Controller/userController')
 //for heroku 
 const path = require("path")
 const port = process.env.PORT || 3005
+
+io.on('connection', function(socket){
+    console.log('a user connected');
+})
+  
+http.listen(3001, function(){
+    console.log('listening on *:3001')
+})
 
 app.use(express.json())
 app.use(cors())
