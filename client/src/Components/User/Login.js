@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from '../../Config/axios'
 import {Link} from 'react-router-dom'
+import {FormGroup,FormControl, Input, InputLabel, FormHelperText, Button} from '@material-ui/core'
 
 class Login extends React.Component{
     constructor(props){
@@ -44,17 +45,20 @@ class Login extends React.Component{
     }
     render(){
         return(
-            <form onSubmit={this.handleSubmit}>
-                <h2 >LOGIN</h2>
-                <label>
-                    <input  type="text" name="email" value={this.state.email}  onChange={this.handleChange} placeholder="Email"/>
-                </label><br/>               
-                <label>                               
-                    <input  type="password" name="password" value={this.state.password} onChange={this.handleChange} placeholder="Password" />
-                </label><br />
-                <input type="submit"/><br />
-                <Link to="/users/register">Register</Link> 
-            </form>
+            <FormGroup id="form">
+                <h2>LOGIN</h2>
+                <FormControl id="input">
+                    <InputLabel>Email</InputLabel>
+                    <Input  type="text" name="email" value={this.state.email}  onChange={this.handleChange} placeholder="Email"/>
+                    <FormHelperText>Must Haved Registered</FormHelperText>
+                </FormControl>
+                <FormControl id="input">
+                    <InputLabel>Password</InputLabel>
+                    <Input  type="password" name="password" value={this.state.password} onChange={this.handleChange} placeholder="Password" />
+                </FormControl>
+                <Button id="button" onClick={this.handleSubmit}>Submit</Button> 
+                <Button id="button"><Link to="/users/register">Register</Link></Button>
+            </FormGroup>
         )
     }
 }

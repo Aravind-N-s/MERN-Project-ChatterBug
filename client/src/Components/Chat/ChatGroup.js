@@ -10,7 +10,7 @@ class ChatGroup extends React.Component{
         this.state ={
             groupDetails:'',
             text:'',
-            msg:''
+            message:'text will appear here'
         }
         this.handleChange=this.handleChange.bind(this)
         this.handleSubmit=this.handleSubmit.bind(this)
@@ -45,23 +45,29 @@ class ChatGroup extends React.Component{
         })
     }
 
-    render(){
-        // console.log(this.state.groupDetails)
+    componentWillMount(){
         if(!socket) {
             socket = io(':3001')
-            socket.on('chat message', function(msg){
-                console.log(msg)
+            socket.on('chat message', (msg) => {
+                this.setState((prevState) => ({
+                    message: [msg, ...prevState.message]
+                }))
             })
         }
+    }
+
+    render(){
+        // console.log(this.state.groupDetails)
+        
         return(
             <div>
                 <p>{this.state.groupDetails && (
                         this.state.groupDetails.group
                 )}</p>
-                <p>{this.state.msg}</p>
+                <p>{this.state.message}+'/n'</p><br />
                 <p>Output</p>
                 <FormControl>
-                    <Input type="text" placeholder="Message" value={this.state.text} onChange={this.handleChange}/>
+                    <Input type="text" multiline placeholder="Message" value={this.state.text} onChange={this.handleChange}/>
                     <Button
                         onClick={this.handleSubmit}
                     >Send</Button>

@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from '../../Config/axios'
+import {FormGroup,FormControl, Input, InputLabel, FormHelperText, Button} from '@material-ui/core'
 
 class Register extends React.Component{
         constructor(){
@@ -39,20 +40,24 @@ class Register extends React.Component{
     }
 
     render(){
-        return(         
-            <form onSubmit={this.handleSubmit}>
-                <h2 >REGISTER</h2>
-                <label>
-                    <input type="text" name="username" value={this.state.username} onChange={this.handleChange} placeholder="Username"/>
-                </label><br/>
-                <label>
-                    <input type="text" name="email" value={this.state.email}  onChange={this.handleChange} placeholder="Email"/>
-                </label><br/>                       
-                <label>                                
-                    <input type="password" name="password" value={this.state.password} onChange={this.handleChange} placeholder="Password" />
-                </label><br/>
-                <input type="submit" value="Submit"/>
-            </form>
+        return(
+            <FormGroup id="form">
+                <h2>Register</h2>
+                <FormControl id="input">
+                    <InputLabel>User Name</InputLabel>
+                    <Input type="text" name="username" value={this.state.username} onChange={this.handleChange} placeholder="User Name"/>
+                    <FormHelperText>User Name Must Be Unique</FormHelperText>
+                </FormControl>
+                <FormControl id="input">
+                    <InputLabel>Email</InputLabel>
+                    <Input type="text" name="email" value={this.state.email}  onChange={this.handleChange} placeholder="Email"/>
+                </FormControl>
+                <FormControl id="input">
+                    <InputLabel>Password</InputLabel>
+                    <Input  type="password" name="password" value={this.state.password} onChange={this.handleChange} placeholder="Password" />
+                </FormControl>
+                <Button id="button" onClick={this.handleSubmit}>Submit</Button>
+            </FormGroup>           
         )
     }
 }
