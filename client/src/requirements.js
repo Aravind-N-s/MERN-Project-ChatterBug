@@ -1,6 +1,5 @@
 import React from 'react'
 import {Redirect} from 'react-router-dom'
-import Popup from 'reactjs-popup'
 import './index.css'
 import {Tabs, Tab} from '@material-ui/core'
 
@@ -14,7 +13,7 @@ export default class LoginPage extends React.Component {
     render() {
         if(this.state.login){return <Redirect to="/users/login"/>}
         return (
-            <img src="/1.jpg" onMouseOver={() => (<h2>Click on link to fucntion</h2>)} onClick={() => (this.setState(() => ({login:true})))}/>  
+            <img id="img" src="/1.jpg" data-file="/1.mp3" onClick={() => (this.setState(() => ({login:true})))}/>  
         )
     }
 }
