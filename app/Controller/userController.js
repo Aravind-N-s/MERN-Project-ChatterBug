@@ -42,10 +42,13 @@ router.get('/account',authenticateUser, (req,res)=>{
 })
 //localhost:3005/users/info
 router.get('/info',authenticateUser, (req,res) =>{
-    // const {user} = req
+    const {user} = req
     User.find()
     .then((users) => {
-        res.json((users.map(user => {return(_.pick(user,['_id','email']))})))
+        res.json((users.map(usr => 
+            {
+                return(_.reject(_.pick(usr, ['_id','username','email'])),{'._id':user._id}) //_.pick(usr,['_id','username','email'])
+            })))
     })
     .catch((err) => {
         res.send(err)

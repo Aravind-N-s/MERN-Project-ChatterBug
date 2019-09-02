@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from '../../Config/axios'
+import {Redirect} from 'react-router-dom'
 import {FormGroup,FormControl, Input, InputLabel, FormHelperText, Button} from '@material-ui/core'
 
 class Register extends React.Component{
@@ -8,7 +9,8 @@ class Register extends React.Component{
             this.state={
                 username:'',
                 email:'',
-                password:''
+                password:'',
+                click: false
             }
             this.handleChange=this.handleChange.bind(this)
             this.handleSubmit=this.handleSubmit.bind(this)
@@ -40,10 +42,11 @@ class Register extends React.Component{
     }
 
     render(){
+        if(this.state.click){return <Redirect to="/"/>}
         return(
             <FormGroup id="form">
-                <img id="imgForm" src="/1.jpg"/>
-                <h2>Register</h2>
+                <img id="imgForm" alt="loginImg" src="/1.jpg" onClick={() => (this.setState(() => ({click:true})))}/>  
+                <h2>REGISTER</h2>
                 <FormControl id="input">
                     <InputLabel>User Name</InputLabel>
                     <Input type="text" name="username" value={this.state.username} onChange={this.handleChange} placeholder="User Name"/>

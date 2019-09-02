@@ -26,11 +26,11 @@ class ChatList extends React.Component{
     }
     render(){
         return(
-            <div>
+            <div style={{marginTop:"10%"}}>
                 {this.state.list.map(lists => {
                     return(
                         <div key={lists._id}>
-                            <Link to={`/chat/${lists._id}`}>{lists.group}</Link><br/>
+                            <Link to={`/chats/${lists._id}`}>{lists.group}</Link><br/>
                             <p>{lists.desc}</p>
                         </div>
                     )   

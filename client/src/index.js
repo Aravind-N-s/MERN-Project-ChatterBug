@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import {BrowserRouter, Switch, Route} from 'react-router-dom'
-import {AppBar, Toolbar, Button} from '@material-ui/core'
+import {BrowserRouter, Switch, Route,NavLink} from 'react-router-dom'
+import {AppBar, Toolbar} from '@material-ui/core'
 
 import Login from './Components/User/Login'
 import Register from './Components/User/Register'
@@ -39,9 +39,9 @@ class App extends React.Component {
                 <div>
                     {!this.state.isAuthenticated &&(
                         <div>
-                        <AppBar id="back">
-                            <Toolbar >
-                                <h1 id="centerBar">ChatApp</h1>
+                        <AppBar>
+                            <Toolbar style={{background:"black"}}>
+                                <h1 id="chatName1">ChatApp</h1>
                             </Toolbar>
                         </AppBar>    
                         <Switch>
@@ -56,14 +56,15 @@ class App extends React.Component {
                         </div>
                     )}
                     {this.state.isAuthenticated && (
-                        <div style={{backgroundColor:"black"}}>
-                            <AppBar id="back">
-                                <Toolbar >
-                                    <h1 id="centerBar">ChatApp</h1>
-                                    <Button>Home</Button>
+                        <div>
+                            <AppBar>
+                                <Toolbar id='loginBar'>
+                                    <img style={{width:'4%',height:'70px',borderRadius: '50%'}} alt="loginImg" src="/1.jpg"/>
+                                    <h1 id="chatName">ChatApp</h1>
+                                    <NavLink style={{color:"red", marginLeft:"45%"}}to='/'>Home</NavLink>
                                 </Toolbar>
                             </AppBar> 
-                            <Switch>
+                            <Switch> 
                                 <>
                                     <Route exact strict path="/" component={SelectButtons}/>
                                     <Route exact strict path="/users/account" component={Account}/>

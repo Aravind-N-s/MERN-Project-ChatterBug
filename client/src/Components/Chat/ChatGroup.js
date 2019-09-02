@@ -60,7 +60,7 @@ class ChatGroup extends React.Component{
         // console.log(this.state.groupDetails)
         
         return(
-            <div>
+            <div style={{marginTop:"10%"}}>
                 <p>{this.state.groupDetails && (
                         this.state.groupDetails.group
                 )}</p>

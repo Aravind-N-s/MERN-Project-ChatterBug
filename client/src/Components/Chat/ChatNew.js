@@ -1,7 +1,7 @@
 import React from 'react'
 import Select from 'react-select'
 import axios from '../../Config/axios'
-import {FormControl, Input, InputLabel} from '@material-ui/core'
+import {FormControl, Input, InputLabel, Button} from '@material-ui/core'
 
 class ChatNew extends React.Component{
     constructor(){
@@ -15,6 +15,7 @@ class ChatNew extends React.Component{
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSelect = this.handleSelect.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     handleChange(e){
@@ -30,6 +31,22 @@ class ChatNew extends React.Component{
             twoLevel : prevState.twoLevel.concat(val)
         }))
     }
+    handleSubmit(e){
+        const formData = {
+            group:this.state.groupName,
+            desc:this.state.groupDesc,
+            twoLevel:this.state.twoLevel
+        }
+        axios.post('/chat',{
+            headers:{
+                'x-auth':localStorage.getItem('userAuthToken')
+            }
+        }) 
+        .then(response=>{
+            this.props.history.push('/')
+        })
+        console.log(formData)
+    }
 
     componentDidMount(){
         axios.get('/users/info',{
@@ -43,19 +60,20 @@ class ChatNew extends React.Component{
         })
     }
     render(){
-        console.log(this.state)
+        console.log(this.state.users)
         return(
-            <div>
-                <FormControl>
+            <div style={{marginTop:"10%"}} id="formLog">
+                <h2>Create Group</h2>
+                <FormControl id="input">
                     <InputLabel>Group Name</InputLabel>
                     <Input type="text" placeholder="Group Name" name="groupName" value={this.state.groupName} onChange={this.handleChange}/><br/>
                 </FormControl><br/>
-                <FormControl>
+                <FormControl id="input">
                     <InputLabel>Group Desc</InputLabel>
                     <Input type="text" placeholder="Group Desc" name="groupDesc" value={this.state.groupDesc} onChange={this.handleChange}/>
                 </FormControl><br/>
-                <FormControl>
-                    <Select 
+                <FormControl style={{marginTop:"10px",width:'50%',marginBottom:"10px"}}>
+                    <Select id="input"
                         closeMenuOnSelect={false}
                         isMulti
                         onChange={this.handleSelect}
@@ -72,26 +90,28 @@ class ChatNew extends React.Component{
                         }
                     />
                 </FormControl><br/>
-                {/* <FormControl>
-                    <Select 
-                        closeMenuOnSelect={false}
-                        isMulti
-                        options ={
-                            this.state.users && (
-                                this.state.users.map(user => {
-                                    return{
-                                        name: user,
-                                        value: user._id,
-                                        label: user.email
-                                    }
-                                })
-                            )
-                        }
-                    />
-                </FormControl> */}
+                <Button onClick={this.handleSubmit}>Submit</Button>
             </div>
         )
     }
 }
 
 export default ChatNew
+
+{/* <FormControl>
+    <Select 
+        closeMenuOnSelect={false}
+        isMulti
+        options ={
+            this.state.users && (
+                this.state.users.map(user => {
+                    return{
+                        name: user,
+                        value: user._id,
+                        label: user.email
+                    }
+                })
+            )
+        }
+    />
+</FormControl> */}
