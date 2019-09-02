@@ -1,6 +1,11 @@
 body{
+<<<<<<< HEAD
     background: tomato;
     text-align: center;
+=======
+    /* background: red; */
+    /* text-align: center; */
+>>>>>>> dc0b6e3c7e25f555295606503a04672012784edd
   }
   
 #form{
