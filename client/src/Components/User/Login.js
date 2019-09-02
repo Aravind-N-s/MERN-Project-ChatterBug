@@ -46,6 +46,7 @@ class Login extends React.Component{
     render(){
         return(
             <FormGroup id="form">
+            <img id="imgForm" src="/1.jpg"/>  
                 <h2>LOGIN</h2>
                 <FormControl id="input">
                     <InputLabel>Email</InputLabel>

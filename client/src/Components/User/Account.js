@@ -27,11 +27,8 @@ class Account extends React.Component{
         return(
             <div>
                 <h6>User Account</h6>
-                    <h4>
-                        {this.state.user.username}
-                    </h4>
-                    
-               <Link to="/users/logout">Logout</Link> 
+                <h4>{this.state.user.username}</h4>  
+                <Link to="/users/logout">Logout</Link> 
             </div>
         )
     }

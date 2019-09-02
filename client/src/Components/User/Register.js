@@ -31,7 +31,7 @@ class Register extends React.Component{
             if(response.data.errors){
                 alert(response.data.message)
             }else {
-                this.props.history.push('/user/login')
+                this.props.history.push('/users/login')
             }
         })
         .catch(err=> {
@@ -42,6 +42,7 @@ class Register extends React.Component{
     render(){
         return(
             <FormGroup id="form">
+                <img id="imgForm" src="/1.jpg"/>
                 <h2>Register</h2>
                 <FormControl id="input">
                     <InputLabel>User Name</InputLabel>

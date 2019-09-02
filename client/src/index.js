@@ -39,9 +39,9 @@ class App extends React.Component {
                 <div>
                     {!this.state.isAuthenticated &&(
                         <div>
-                        <AppBar>
+                        <AppBar id="back">
                             <Toolbar >
-                                <h1 id="center">ChatApp</h1>
+                                <h1 id="centerBar">ChatApp</h1>
                             </Toolbar>
                         </AppBar>    
                         <Switch>
@@ -56,10 +56,10 @@ class App extends React.Component {
                         </div>
                     )}
                     {this.state.isAuthenticated && (
-                        <div>
-                            <AppBar>
+                        <div style={{backgroundColor:"black"}}>
+                            <AppBar id="back">
                                 <Toolbar >
-                                    <h1 id="center">ChatApp</h1>
+                                    <h1 id="centerBar">ChatApp</h1>
                                     <Button>Home</Button>
                                 </Toolbar>
                             </AppBar> 
