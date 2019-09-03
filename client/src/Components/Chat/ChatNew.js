@@ -60,7 +60,23 @@ class ChatNew extends React.Component{
         })
     }
     render(){
-        console.log(this.state.users)
+        {/* <FormControl>
+            <Select 
+                closeMenuOnSelect={false}
+                isMulti
+                options ={
+                    this.state.users && (
+                        this.state.users.map(user => {
+                            return{
+                                name: user,
+                                value: user._id,
+                                label: user.email
+                            }
+                        })
+                    )
+                }
+            />
+        </FormControl> */}
         return(
             <div style={{marginTop:"10%"}} id="formLog">
                 <h2>Create Group</h2>
@@ -97,21 +113,3 @@ class ChatNew extends React.Component{
 }
 
 export default ChatNew
-
-{/* <FormControl>
-    <Select 
-        closeMenuOnSelect={false}
-        isMulti
-        options ={
-            this.state.users && (
-                this.state.users.map(user => {
-                    return{
-                        name: user,
-                        value: user._id,
-                        label: user.email
-                    }
-                })
-            )
-        }
-    />
-</FormControl> */}

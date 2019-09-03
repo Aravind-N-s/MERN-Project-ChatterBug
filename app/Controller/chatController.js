@@ -34,7 +34,7 @@ module.exports.show = (req,res) => {
     Chat.findOne({
         userAdmin:req.user._id,
         _id: id
-    }).populate('userAdmin','twoLevel')
+    }).populate('userAdmin').populate('twoLevel')
     .then((chat) => {
         if(!chat){
             res.json({})

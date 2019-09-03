@@ -1,6 +1,7 @@
 body{
     background: tomato;
     text-align: center;
+    position: relative;
   }
   
 #form{
@@ -31,15 +32,35 @@ body{
   text-align:center; 
 }
 #img{
-  margin-Top: 10%;
-  border-radius: 200px;
+  margin-Top: 5%;
+  animation-name: asura;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
+
 #imgForm{
   margin-Left: 45%;
   width: 100px;
   height: 100px;
   border-radius: 100%;
+  animation-name: asura;
+  animation-duration: 2s;
+  animation-iteration-count: 2;
+  animation-direction: alternate
 }
+
+@keyframes asura {
+  0% {
+    border-radius: 50% 50% 50% 0;
+    transform: rotateY(180deg);
+    transition-delay: 1s;
+  }
+  100% {
+    border-radius: 50% 50% 50% 0;
+  }
+}
+
 #button{
   border-style: solid;
   margin-Top: 10px;
@@ -66,13 +87,27 @@ body{
 
 #loginBar{
   background-color: #efefef;
-  
 }
 
 #chatName{
   color:red;
   margin-Left:40%;
-  transform: rotate(-15deg);
+  animation-name: rot;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes rot{
+  0% {
+    transform: rotate(15deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-15deg);
+  }
 }
 
 #chatName1{
