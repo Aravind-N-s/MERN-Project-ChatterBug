@@ -7,6 +7,7 @@ class ChatNew extends React.Component{
     constructor(){
         super()
         this.state = {
+            usr:'',
             users:[],
             groupName:'',
             groupDesc:'',
@@ -26,10 +27,10 @@ class ChatNew extends React.Component{
     }
     
     handleSelect(e){
-        const val=e[0].value
-        this.setState((prevState) => ({
-            twoLevel : prevState.twoLevel.concat(val)
-        }))
+        const select = e
+        this.setState(() => ({
+            twoLevel : select._id
+        }))    
     }
     handleSubmit(e){
         const formData = {
@@ -37,18 +38,28 @@ class ChatNew extends React.Component{
             desc:this.state.groupDesc,
             twoLevel:this.state.twoLevel
         }
-        axios.post('/chat',{
+        axios.post('/chat',formData,{
             headers:{
                 'x-auth':localStorage.getItem('userAuthToken')
             }
         }) 
         .then(response=>{
-            this.props.history.push('/')
+            console.log(response.data)
+            this.props.history.push('/chat/list')
         })
-        console.log(formData)
     }
 
     componentDidMount(){
+        axios.get('/users/account',{
+            headers:{
+                'x-auth':localStorage.getItem('userAuthToken')
+            }
+        })
+        .then(response =>{
+            const usr = response.data
+            this.setState ({usr})
+        })
+
         axios.get('/users/info',{
             headers:{
                 'x-auth':localStorage.getItem('userAuthToken')
@@ -60,6 +71,7 @@ class ChatNew extends React.Component{
         })
     }
     render(){
+        console.log(this.state)
         {/* <FormControl>
             <Select 
                 closeMenuOnSelect={false}
@@ -89,17 +101,17 @@ class ChatNew extends React.Component{
                     <Input type="text" placeholder="Group Desc" name="groupDesc" value={this.state.groupDesc} onChange={this.handleChange}/>
                 </FormControl><br/>
                 <FormControl style={{marginTop:"10px",width:'50%',marginBottom:"10px"}}>
-                    <Select id="input"
+                    <Select
                         closeMenuOnSelect={false}
                         isMulti
                         onChange={this.handleSelect}
                         options ={
                             this.state.users && (
-                                this.state.users.map(user => {
+                                this.state.users.map(ur => {
                                     return{
                                         name: 'twoLevel',
-                                        value: user._id,
-                                        label: user.email
+                                        value: ur._id,
+                                        label: ur.email
                                     }
                                 })
                             )

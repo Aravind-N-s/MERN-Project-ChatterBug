@@ -46,14 +46,20 @@ router.get('/info',authenticateUser, (req,res) =>{
     User.find()
     .then((users) => {
         res.json((users.map(usr => 
-            {
-                return(_.reject(_.pick(usr, ['_id','username','email'])),{'._id':user._id}) //_.pick(usr,['_id','username','email'])
-            })))
+        {
+            console.log(user._id, usr._id)
+            if(user._id != usr._id){
+                return (_.pick(usr,['_id','email']))
+            }else {
+                return ("email")
+            }
+            
+        }
+        )))        
     })
     .catch((err) => {
         res.send(err)
     })
-
 })
 //localhost:3005/users/logout
 router.delete('/logout',authenticateUser, (req,res) =>{
