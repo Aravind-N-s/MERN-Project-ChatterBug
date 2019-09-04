@@ -8,7 +8,7 @@ class ChatGroup extends React.Component{
     constructor(){
         super()
         this.state ={
-            groupDetails:{},
+            groupDetails:[],
             text:'',
             message:[]
         }
@@ -39,14 +39,15 @@ class ChatGroup extends React.Component{
             }
         })
         .then(response =>{
+            console.log(response.data)
             this.setState(() =>({
-                groupDetails: response.data
+                groupDetails: response.data[0]
             }))
         })
     }
 
     render(){  
-        console.log(this.state.message)     
+        console.log(this.state.groupDetails, 'data')
         if(!socket) {
             socket = io(':3001')
             socket.on('chat message', (msg) => {

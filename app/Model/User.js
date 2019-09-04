@@ -56,9 +56,7 @@ userSchema.pre('save', function(next){
         })
     }else{
         next()
-    }
-    
-
+    }   
 })
 
 //own static model

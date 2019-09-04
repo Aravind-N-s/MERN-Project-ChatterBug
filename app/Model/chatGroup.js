@@ -8,7 +8,9 @@ const ChatSchema = new Schema({
         required: true
     },
     desc:{
-        type: String
+        type: String,
+        required: true,
+        unique: true
     },
     userAdmin:{
         type: Schema.Types.ObjectId,
@@ -19,15 +21,20 @@ const ChatSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     }],
-    threeLevel:[{
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    }],
+    // participants:[{
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'User'
+    // }],
     createdAt:{
         type: Date,
         default: Date.now()
     }
 })
+
+// userSchema.post('save', function(next){
+//     const user = this
+//     user.participants = user.twoLevel.concat
+// })
 
 const Chat = mongoose.model('Chat', ChatSchema)
 

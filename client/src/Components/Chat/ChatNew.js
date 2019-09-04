@@ -1,6 +1,7 @@
 import React from 'react'
 import Select from 'react-select'
 import axios from '../../Config/axios'
+import _ from 'lodash'
 import {FormControl, Input, InputLabel, Button} from '@material-ui/core'
 
 class ChatNew extends React.Component{
@@ -11,7 +12,7 @@ class ChatNew extends React.Component{
             users:[],
             groupName:'',
             groupDesc:'',
-            twoLevel:[]
+            twoLevel:''
             // threeLevel:'' 
         }
         this.handleChange = this.handleChange.bind(this)
@@ -29,7 +30,7 @@ class ChatNew extends React.Component{
     handleSelect(e){
         const select = e
         this.setState(() => ({
-            twoLevel : select._id
+            twoLevel : select.map((sel) => {return sel.value})
         }))    
     }
     handleSubmit(e){
@@ -44,7 +45,6 @@ class ChatNew extends React.Component{
             }
         }) 
         .then(response=>{
-            console.log(response.data)
             this.props.history.push('/chat/list')
         })
     }
@@ -66,29 +66,17 @@ class ChatNew extends React.Component{
             }
         })
         .then(response =>{
-            const users = response.data
+            const datas = response.data
+            const users = datas && (
+                datas.filter(data => {
+                    if(data){
+                        return (data)
+                    }
+                }))
             this.setState ({users})
         })
     }
     render(){
-        console.log(this.state)
-        {/* <FormControl>
-            <Select 
-                closeMenuOnSelect={false}
-                isMulti
-                options ={
-                    this.state.users && (
-                        this.state.users.map(user => {
-                            return{
-                                name: user,
-                                value: user._id,
-                                label: user.email
-                            }
-                        })
-                    )
-                }
-            />
-        </FormControl> */}
         return(
             <div style={{marginTop:"10%"}} id="formLog">
                 <h2>Create Group</h2>
@@ -107,13 +95,13 @@ class ChatNew extends React.Component{
                         onChange={this.handleSelect}
                         options ={
                             this.state.users && (
-                                this.state.users.map(ur => {
+                                (this.state.users.map(ur => {
                                     return{
                                         name: 'twoLevel',
                                         value: ur._id,
                                         label: ur.email
                                     }
-                                })
+                                }))
                             )
                         }
                     />

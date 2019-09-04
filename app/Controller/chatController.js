@@ -31,10 +31,10 @@ module.exports.create = (req,res) =>{
 //show one chat
 module.exports.show = (req,res) => {
     const id = req.params.id
-    Chat.findOne({
+    Chat.find({
         userAdmin:req.user._id,
         _id: id
-    }).populate('userAdmin').populate('twoLevel')
+    }).populate('userAdmin','email').populate('twoLevel','email')
     .then((chat) => {
         if(!chat){
             res.json({})

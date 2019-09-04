@@ -38,24 +38,17 @@ router.post('/login', (req,res) =>{
 router.get('/account',authenticateUser, (req,res)=>{
     const {user} = req
     // res.send(user)
-    res.send(_.pick(user, ['_id','username','email','createdAt']))
+    res.send(_.pick(user, ['_id','username','email']))
 })
 //localhost:3005/users/info
 router.get('/info',authenticateUser, (req,res) =>{
     const {user} = req
     User.find()
     .then((users) => {
-        res.json((users.map(usr => 
-        {
-            console.log(user._id, usr._id)
-            if(user._id != usr._id){
-                return (_.pick(usr,['_id','email']))
-            }else {
-                return ("email")
-            }
-            
-        }
-        )))        
+       res.json(users.map(usr =>{
+        if(usr.id != user._id){return(_.pick(usr,['_id','email']))} 
+        else{return(false)}
+        })) 
     })
     .catch((err) => {
         res.send(err)
