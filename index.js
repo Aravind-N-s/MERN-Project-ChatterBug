@@ -1,27 +1,28 @@
 const express = require('express')
 const cors = require('cors')
-const {mongoose} = require('./Config/database') // mongoose without {} if single value is passed
+const {mongoose} = require('./Config/database')
 const app = express()
-var http = require('http').createServer(app)
-var io = require('socket.io')(http)
-//1st approach
 const router = require('./Config/routes')
-//2nd approach
 const { usersRouter } = require('./app/Controller/userController') 
+const http = require('http').createServer(app)
+const io = require('socket.io').listen(http)
 
 //for heroku 
 const path = require("path")
 const port = process.env.PORT || 3005
 
-io.on('connection', function(socket){
-    console.log('a user connected')
-    socket.on('chat message', function(msg){
-        io.emit('chat message', msg)
-      })
-})
-  
-http.listen(3001, function(){
+http.listen(process.env.PORT || 3001, function(){
     console.log('listening on *:3001')
+})
+
+io.on('connection', (socket) => {
+    console.log('a user connected')
+    socket.on('chat message', (msg, user) => {
+        console.log(msg)
+        io.emit('chat message', msg, user)
+    })
+    socket.on("disconnect", () => 
+        console.log("Client disconnected"))
 })
 
 app.use(express.json())

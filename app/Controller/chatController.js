@@ -32,7 +32,7 @@ module.exports.create = (req,res) =>{
 module.exports.show = (req,res) => {
     const id = req.params.id
     Chat.find({
-        userAdmin:req.user._id,
+        // twoLevel:req.user._id,
         _id: id
     }).populate('userAdmin','email').populate('twoLevel','email')
     .then((chat) => {

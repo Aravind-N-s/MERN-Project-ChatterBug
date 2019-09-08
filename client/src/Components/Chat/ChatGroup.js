@@ -8,6 +8,7 @@ class ChatGroup extends React.Component{
     constructor(){
         super()
         this.state ={
+            userName:'',
             groupDetails:[],
             text:'',
             message:[]
@@ -17,6 +18,7 @@ class ChatGroup extends React.Component{
     }
 
     handleChange(e){
+        console.log(e)
         e.persist()
         this.setState(() => ({
             text : e.target.value
@@ -25,10 +27,8 @@ class ChatGroup extends React.Component{
 
     handleSubmit(e){
         e.preventDefault()
-        socket.emit('chat message',this.state.text)
-        this.setState(()=>({
-            text: ''
-        }))
+        socket.emit('chat message',this.state.text,this.state.userName)
+        this.setState(()=>({text: ''}))
     }
 
     componentDidMount(props){
@@ -39,20 +39,29 @@ class ChatGroup extends React.Component{
             }
         })
         .then(response =>{
-            console.log(response.data)
             this.setState(() =>({
                 groupDetails: response.data[0]
+            }))
+        })
+        axios.get('/users/account',{
+            headers:{
+                'x-auth':localStorage.getItem('userAuthToken')
+            }
+        })
+        .then(response =>{
+            this.setState(() =>({
+                userName: response.data.username
             }))
         })
     }
 
     render(){  
-        console.log(this.state.groupDetails, 'data')
         if(!socket) {
             socket = io(':3001')
-            socket.on('chat message', (msg) => {
+            socket.on('chat message', (msg, user) => {
+                const msgUser = user + ' : ' + msg
                 this.setState((prevState) => ({
-                    message: [...prevState.message, msg]
+                    message: [...prevState.message, msgUser]
                 }))
             })
         }
