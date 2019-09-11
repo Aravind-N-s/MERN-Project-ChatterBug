@@ -16,6 +16,7 @@ class ChatList extends React.Component{
             }
         })
         .then(response =>{
+            console.log(response.data)
             this.setState(() => ({
                 list: response.data
             }))

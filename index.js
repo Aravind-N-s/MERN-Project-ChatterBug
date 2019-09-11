@@ -18,7 +18,6 @@ http.listen(process.env.PORT || 3001, function(){
 io.on('connection', (socket) => {
     console.log('a user connected')
     socket.on('chat message', (msg, user) => {
-        console.log(msg)
         io.emit('chat message', msg, user)
     })
     socket.on("disconnect", () => 

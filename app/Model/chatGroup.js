@@ -9,6 +9,7 @@ const ChatSchema = new Schema({
     },
     desc:{
         type: String,
+        unique: true,
         required: true,
         unique: true
     },
@@ -21,21 +22,19 @@ const ChatSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     }],
-    // participants:[{
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'User'
-    // }],
     createdAt:{
         type: Date,
         default: Date.now()
     }
 })
 
-// userSchema.post('save', function(next){
-//     const user = this
-//     user.participants = user.twoLevel.concat
+// ChatSchema.post('save', (next) => {
+//     const chat = this
+//     // chat.twoLevel.push(chat.userAdmin)
+//     // chat.save()
+    
+//     next()
 // })
-
 const Chat = mongoose.model('Chat', ChatSchema)
 
 module.exports = Chat

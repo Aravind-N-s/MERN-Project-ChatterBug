@@ -80,9 +80,7 @@ class ChatGroup extends React.Component{
                 )}
                 <FormControl>
                     <Input type="text" multiline placeholder="Message" value={this.state.text} onChange={this.handleChange} />
-                    <Button
-                        onClick={this.handleSubmit}
-                    >Send</Button>
+                    <Button onClick={this.handleSubmit}>Send</Button>
                 </FormControl>
             </div>
         )
