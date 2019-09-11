@@ -11,7 +11,7 @@ const io = require('socket.io').listen(http)
 const path = require("path")
 const port = process.env.PORT || 3005
 
-http.listen(process.env.PORT || 3001, function(){
+http.listen(3001, function(){
     console.log('listening on *:3001')
 })
 
