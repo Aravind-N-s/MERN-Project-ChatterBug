@@ -12,7 +12,6 @@ router.post('/register', (req,res) => {
         .then(user => {
             // res.json(user)
             res.json(user)
-            console.log(user,"user registered")
         })
         .catch(err =>{
             res.send(err)

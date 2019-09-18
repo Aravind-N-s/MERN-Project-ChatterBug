@@ -8,8 +8,7 @@ class Login extends React.Component{
         super(props)
         this.state={
             email:'',
-            password:'',
-            click: false
+            password:''
         }
         this.handleChange=this.handleChange.bind(this)
         this.handleSubmit=this.handleSubmit.bind(this)
@@ -35,7 +34,6 @@ class Login extends React.Component{
                 if(token){
                     localStorage.setItem('userAuthToken',token)
                     this.props.handleAuth(true)
-                    this.props.history.push('/')
                 }
             }
         })
@@ -45,11 +43,8 @@ class Login extends React.Component{
 
     }
     render(){
-        if(this.state.click){return <Redirect to="/"/>}
         return(
-            <FormGroup id="form">
-                <img id="imgForm" alt="Img" src="/1.jpg" onClick={() => (this.setState(() => ({click:true})))}/>  
-                <h2>LOGIN</h2>
+            <FormGroup style={{float:"left"}} id="form">
                 <FormControl id="input">
                     <InputLabel>Email</InputLabel>
                     <Input  type="text" name="email" value={this.state.email}  onChange={this.handleChange} placeholder="Email"/>
@@ -59,8 +54,7 @@ class Login extends React.Component{
                     <InputLabel>Password</InputLabel>
                     <Input  type="password" name="password" value={this.state.password} onChange={this.handleChange} placeholder="Password" />
                 </FormControl>
-                <Button id="button" onClick={this.handleSubmit}>Submit</Button> 
-                <Button id="button"><Link to="/users/register">Register</Link></Button>
+                <Button variant="contained" id="button" onClick={this.handleSubmit}>Submit</Button> 
             </FormGroup>
         )
     }

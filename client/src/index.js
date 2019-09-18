@@ -1,8 +1,11 @@
+import './index.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
-import {BrowserRouter, Switch, Route,NavLink} from 'react-router-dom'
-import {AppBar, Toolbar} from '@material-ui/core'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css'
+import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import {AppBar, Toolbar, List, ListItem, ListItemAvatar, ListItemText, ListItemIcon, Collapse} from '@material-ui/core'
+
 
 import Login from './Components/User/Login'
 import Register from './Components/User/Register'
@@ -12,13 +15,13 @@ import Logout from './Components/User/Logout'
 import ChatList from './Components/Chat/ChatList'
 import ChatGroup from './Components/Chat/ChatGroup'
 import ChatNew from './Components/Chat/ChatNew'
-import ListPage, {SelectButtons} from './requirements'
 
 class App extends React.Component {
     constructor(props){
         super(props)
         this.state={
-            isAuthenticated: false
+            isAuthenticated: false,
+            click: false
         }
         this.handleAuth=this.handleAuth.bind(this)
     }
@@ -32,27 +35,28 @@ class App extends React.Component {
             this.setState({isAuthenticated: true})
         }
     }
-
     render() {
         return (
             <BrowserRouter >
                 <div>
                     {!this.state.isAuthenticated &&(
-                        <div>
-                        <AppBar>
-                            <Toolbar style={{background:"black"}}>
-                                <h1 id="chatName1">ChatApp</h1>
-                            </Toolbar>
-                        </AppBar>    
-                        <Switch>
-                            <>
-                                <Route exact strict path="/" component={ListPage}/>
-                                <Route exact strict path="/users/login" render={(props)=>{
-                                    return <Login {...props } handleAuth={this.handleAuth}/>}}/>
-                                <Route exact strict path="/users/register" render = {(props) => {
-                                    return <Register {...props} handleAuth={this.handleAuth}/>}}/>
-                            </>
-                        </Switch>
+                        <div >
+                             <AppBar style={{background:"blueviolet"}}>
+                                <Toolbar>
+                                    <h1 id="chatName1">ChatApp</h1>
+                                </Toolbar>
+                            </AppBar>
+                            <div id="homepage">    
+                                <img id="img" alt="loginImg" src="/1.jpg"/>
+                                <Tabs id="tabs">
+                                    <TabList>
+                                        <Tab>Login</Tab>
+                                        <Tab>Register</Tab>
+                                    </TabList>
+                                    <TabPanel className={{marginBottom:"0%"}}><Login handleAuth={this.handleAuth}/></TabPanel>
+                                    <TabPanel><Register handleAuth={this.handleAuth}/></TabPanel>
+                                </Tabs>
+                            </div>
                         </div>
                     )}
                     {this.state.isAuthenticated && (
@@ -61,12 +65,34 @@ class App extends React.Component {
                                 <Toolbar id='loginBar'>
                                     <img style={{width:'4%',height:'70px',borderRadius: '50%'}} alt="loginImg" src="/1.jpg"/>
                                     <h1 id="chatName">ChatApp</h1>
-                                    <NavLink style={{color:"red", marginLeft:"45%"}}to='/'>Home</NavLink>
                                 </Toolbar>
                             </AppBar> 
+                            <div>
+                            <List>
+                                <ListItem button>
+                                    <ListItemText primary="Create Group"/>
+                                </ListItem>
+                                <ListItem>
+                                    <ListItemText primary="List Group" button/>
+                                    <Collapse timeout="auto" unmountOnExit>
+                                        <List>
+                                            <ListItem Button>
+                                                <ChatList/>
+                                            </ListItem>
+                                        </List>
+                                    </Collapse>
+                                </ListItem>
+                                <ListItem button>
+                                    <ListItemText primary="Account"/>
+                                    <Collapse timeout="auto" unmountOnExit>
+                                        <Account/>
+                                    </Collapse>
+                                </ListItem>
+                               
+                            </List>
+                            </div>
                             <Switch> 
                                 <>
-                                    <Route exact strict path="/" component={SelectButtons}/>
                                     <Route exact strict path="/users/account" component={Account}/>
                                     <Route exact strict path="/chat/new" component={ChatNew}/>
                                     <Route exact strict path="/chat/list" component={ChatList}/>

@@ -15,7 +15,6 @@ const userSchema = new Schema ({
         type: String,
         required: true,
         unique: true,
-        //how to check format of email
         validate:{
             validator: function(value){
                 return validator.isEmail(value)
@@ -78,9 +77,6 @@ userSchema.statics.findByCredentials = function(email, password){
         }) 
         .catch(err =>{
             return Promise.reject(err)
-            //return new Promise(function(resolve,reject){
-            // reject(err)
-            // })
         })
 }
 
@@ -106,7 +102,6 @@ userSchema.methods.generateToken = function(){
         _id:user._id,
         username: user.username,
         createdAt: Number(new Date())
-        //role etc
     }
     const token = jwt.sign(tokenData, 'jwt@123')
     user.tokens.push({

@@ -28,11 +28,10 @@ const ChatSchema = new Schema({
     }
 })
 
-// ChatSchema.post('save', (next) => {
+// ChatSchema.pre('save', (next) => {
 //     const chat = this
-//     // chat.twoLevel.push(chat.userAdmin)
-//     // chat.save()
-    
+//     chat.twoLevel.push(chat.userAdmin)
+//     chat.save()
 //     next()
 // })
 const Chat = mongoose.model('Chat', ChatSchema)

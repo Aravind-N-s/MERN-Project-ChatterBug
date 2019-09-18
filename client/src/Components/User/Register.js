@@ -9,8 +9,7 @@ class Register extends React.Component{
             this.state={
                 username:'',
                 email:'',
-                password:'',
-                click: false
+                password:''
             }
             this.handleChange=this.handleChange.bind(this)
             this.handleSubmit=this.handleSubmit.bind(this)
@@ -33,7 +32,7 @@ class Register extends React.Component{
             if(response.data.errors){
                 alert(response.data.message)
             }else {
-                this.props.history.push('/users/login')
+                this.props.history.push('/')
             }
         })
         .catch(err=> {
@@ -42,11 +41,8 @@ class Register extends React.Component{
     }
 
     render(){
-        if(this.state.click){return <Redirect to="/"/>}
         return(
-            <FormGroup id="form">
-                <img id="imgForm" alt="loginImg" src="/1.jpg" onClick={() => (this.setState(() => ({click:true})))}/>  
-                <h2>REGISTER</h2>
+            <FormGroup style={{float:"right"}} id="form">
                 <FormControl id="input">
                     <InputLabel>User Name</InputLabel>
                     <Input type="text" name="username" value={this.state.username} onChange={this.handleChange} placeholder="User Name"/>
