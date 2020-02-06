@@ -4,7 +4,7 @@ import {AUTH_SERVICES} from '../../utils/urls'
 import axios from 'axios'
 import {FormGroup,FormControl, Input, InputLabel, FormHelperText, Button} from '@material-ui/core'
 
-class Login extends React.Component{
+class GetStartedContainer extends React.Component{
     constructor(props){
         super(props)
         this.state={
@@ -60,4 +60,4 @@ class Login extends React.Component{
     }
 }
 
-export default Login
+export default GetStartedContainer

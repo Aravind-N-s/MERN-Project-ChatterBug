@@ -3,9 +3,9 @@ import { authAxios } from "../../../../utils/axios";
 export const startAddUser = () => {
   return dispatch => {
     authAxios
-      .get("/users/account", {
+      .get("/user/account", {
         headers: {
-          "x-auth": localStorage.getItem("userAuthToken")
+          'Authorization':`JWT ${localStorage.getItem('userAuthToken')}`
         }
       })
       .then(response => {

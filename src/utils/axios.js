@@ -1,12 +1,12 @@
 import Axios from 'axios'
-import {AUTH_SERVICE , CHAT_SERVICE} from './urls'
+import {AUTH_SERVICES , CHAT_SERVICES} from './urls'
 const authAxios = Axios.create({
-    baseURL: AUTH_SERVICE
+    baseURL: AUTH_SERVICES
     // baseURL:'/'
 })
 
 const chatAxios = Axios.create({
-    baseURL: CHAT_SERVICE
+    baseURL: CHAT_SERVICES
     // baseURL:'/'
 })
 

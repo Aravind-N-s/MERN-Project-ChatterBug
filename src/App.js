@@ -4,12 +4,7 @@ import ReactDOM from "react-dom";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import {
-  List,
-  ListItem,
-  ListItemText,
-  Collapse
-} from "@material-ui/core";
+import { List, ListItem, ListItemText, Collapse } from "@material-ui/core";
 
 import Header from "./utils/header";
 
@@ -79,12 +74,6 @@ class App extends React.Component {
                     </List>
                   </Collapse>
                 </ListItem>
-                <ListItem button>
-                  <ListItemText primary="Account" />
-                  <Collapse timeout="auto" unmountOnExit>
-                    <Account />
-                  </Collapse>
-                </ListItem>
               </List>
 
               <Switch>
@@ -98,7 +87,7 @@ class App extends React.Component {
                   <Route exact strict path="/chat/new" component={ChatNew} />
                   <Route exact strict path="/chat/list" component={ChatList} />
                   <Route exact strict path="/chats/:id" component={ChatGroup} />
-                  <Route
+                  <Route 
                     exact
                     strict
                     path="/users/logout"
@@ -115,4 +104,4 @@ class App extends React.Component {
     );
   }
 }
-export default App
+export default App;
